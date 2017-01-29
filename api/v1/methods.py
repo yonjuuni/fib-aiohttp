@@ -4,6 +4,8 @@ from api import cache
 
 
 async def calculate_fib(n):
+    if n == 0:
+        return [0]
     result = [0, 1]
     for i in range(2, n + 1):
         result.append(result[-1] + result[-2])
@@ -17,8 +19,10 @@ async def fib(request):
     except ValueError:
         return json_response({'error': 'Not an integer.'})
 
-    if number > 1000:
-        return json_response({'error': 'Try a number less than 1000.'})
+    if number > 1000 or number < 0:
+        return json_response(
+            {'error': 'The number should be in range from 0 to 1000.'})
+
     result = await cache.get(number)
 
     if result is None:
