@@ -4,11 +4,10 @@ from aiohttp import web
 from api import create_app
 
 
-app = create_app()
+app = create_app(config='default')
 
-
-def runserver():
-    web.run_app(app)
 
 if 'runserver' in sys.argv:
-    runserver()
+    web.run_app(app)
+else:
+    print('\nInvalid arguments.\nUsage: python3 manage.py runserver')

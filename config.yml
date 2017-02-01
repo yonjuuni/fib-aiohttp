@@ -1,4 +1,3 @@
-# Not an actual config
 debug:
   default: False
   production: False

@@ -16,7 +16,8 @@ def error_pages(overrides):
             except web.HTTPException as ex:
                 override = overrides.get(ex.status)
                 if override is None:
-                    raise
+                    return web.json_response(
+                        {'error': 'Unhandled exception.'}, status=500)
                 else:
                     return await override(request, ex)
         return middleware_handler
